@@ -21,8 +21,15 @@
 </head>
 
 <body>
+    <div class="container mx-auto">
+        @session('error')
+            <div class="my-5 text-center">
+                <h5 class="text-red-600"> {{ $value }} </h5>
+            </div>
+        @endsession
 
-    {{ $slot }}
+        {{ $slot }}
+    </div>
 
     @livewireScripts
 

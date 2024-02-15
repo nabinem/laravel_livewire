@@ -1,5 +1,5 @@
 <x-app-layout>
-    <form method="GET" action="">
+    <form method="GET" action="" class="my-3">
         <label for="default-search"
             class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
         <div class="relative">
@@ -17,6 +17,36 @@
                 class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
         </div>
     </form>
+
+    <div class="my-4 text-center">
+        @auth
+        <a 
+            href="{{ route('users.show', auth()->id()) }}" 
+            class="text-white mr-3 bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-5 me-2 my-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        >
+            My Account
+        </a>
+        <a 
+            href="{{ route('logout') }}" 
+            class="text-white mr-3 bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-5 me-2 my-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        >
+            Log Out
+        </a>
+        @else
+            <a 
+                href="{{ route('login') }}" 
+                class="text-white mr-3 bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-5 me-2 my-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            >
+                Log In
+            </a>
+        @endauth
+        <a 
+            href="{{ route('users.create') }}" 
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-5 me-2 my-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        >
+            Sign Up
+        </a>
+    </div>
 
     <div class="mx-auto w-1/3 my-3 border p-3">
         <livewire:counter />
