@@ -46,6 +46,12 @@
         >
             Sign Up
         </a>
+        <a 
+            href="{{ route('courses.index') }}" 
+            class="text-white mr-5 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-5 me-2 my-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        >
+            Courses
+        </a>
     </div>
 
     <div class="mx-auto w-1/3 my-3 border p-3">
@@ -127,6 +133,14 @@
         </div>
     </div>
 
+    <iframe src="https://www.clickdimensions.com/links/TestPDFfile.pdf" width="100%" height="600px"></iframe>
+
+    <iframe src="https://docs.google.com/gview?url=https://www.clickdimensions.com/links/TestPDFfile.pdf&embedded=true" width="100%" height="600px"></iframe>
+
+    <div id="pdf-container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+
     @push('scripts')
 
     <script>
@@ -139,6 +153,36 @@
                 },
             }))
         })
+
+        // URL to your PDF file
+    const pdfUrl = '{{ asset('biodata.pdf') }}';
+
+    // Asynchronously download PDF
+    pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
+        // Fetch the first page
+        pdf.getPage(1).then(function(page) {
+            const scale = 1.5;
+            const viewport = page.getViewport({ scale: scale });
+
+            // Prepare canvas using PDF page dimensions
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            // Render PDF page into canvas context
+            const renderContext = {
+                canvasContext: context,
+                viewport: viewport
+            };
+            page.render(renderContext);
+
+            // Append canvas to the div
+            document.getElementById('pdf-container').appendChild(canvas);
+        });
+    });
+
+
     </script>
     @endpush
 

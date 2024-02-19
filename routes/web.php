@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\CourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::post('/login-post', [UserController::class, 'loginPost'])->name('users.lo
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::resource('users', UserController::class);
+Route::resource('courses', CourseController::class);
 
 Route::get('subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe');
 Route::post('subscribe', [SubscriptionController::class, 'store'])->name('subscribe.store');
@@ -38,3 +40,5 @@ Route::get('checkout-cancel', [SubscriptionController::class, 'checkoutCancel'])
 Route::get('/billing', function (Request $request) {
     return $request->user()->redirectToBillingPortal(route('users.show', auth()->id()));
 })->middleware(['auth'])->name('billing');
+
+

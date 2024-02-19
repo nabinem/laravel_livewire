@@ -12,4 +12,18 @@ class Course extends Model
 
     protected $guarded = ['id', 'user_id'];
 
+    public function shouldBeSearchable(): bool
+    {
+        return $this->status == 'live';
+    }
+
+    public function toSearchableArray(): array
+    {
+        $array = $this->toArray();
+ 
+        $array['pinned'] = $this->pinned ?? 0;
+ 
+        return $array;
+    }
+
 }
